@@ -692,3 +692,172 @@ small {
     background-position-x: 30%;
   }
 }
+
+
+/* ==========================================================================
+   Hero Section & Factorio Arm Animation (Activity 6)
+   ========================================================================== */
+
+#intro, 
+#intro .overlay {
+  background-color: #4A788E !important;
+}
+
+#intro {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.hero-row {
+  margin-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hero-title {
+  color: #0d253f;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.hero-name {
+  color: #0d253f;
+}
+
+.hero-subtitle {
+  color: #1e293b;
+  margin-top: 0;
+  font-weight: 400;
+}
+
+.hero-typing {
+  font-weight: 600;
+  color: #0d253f;
+}
+
+.typed-cursor {
+  color: #0d253f !important;
+}
+
+.hero-desc {
+  color: #1e293b;
+  font-weight: 300;
+  line-height: 1.5;
+  margin-top: 15px;
+}
+
+.hero-social {
+  margin-top: 25px;
+}
+
+.hero-social a {
+  margin-right: 10px;
+}
+
+.hero-buttons {
+  margin-top: 25px;
+}
+
+/* --- Factorio Robotic Arm Styling --- */
+.automation-stage {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  background: rgba(13, 37, 63, 0.08);
+  border: 2px dashed #0d253f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.assembly-track {
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border: 2px dotted #0d253f;
+  border-radius: 50%;
+  animation: spinTrack 15s linear infinite;
+}
+
+.robotic-arm {
+  position: absolute;
+  width: 95px;
+  height: 8px;
+  background-color: #0d253f;
+  transform-origin: 10px center;
+  left: 115px;
+  top: 121px;
+  animation: rotateArm 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.arm-joint-base {
+  position: absolute;
+  left: -2px;
+  top: -8px;
+  width: 24px;
+  height: 24px;
+  background-color: #1e293b;
+  border: 3px solid #0d253f;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.arm-claw {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  width: 16px;
+  height: 28px;
+  border-left: 3px solid #0d253f;
+  border-top: 3px solid #0d253f;
+  border-bottom: 3px solid #0d253f;
+  border-radius: 4px 0 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.factorio-item {
+  width: 14px;
+  height: 14px;
+  background-color: #ff9800; /* Factorio-Orange */
+  border: 2px solid #b26a00;
+  border-radius: 3px;
+  animation: pulseBox 2.5s ease-in-out infinite alternate;
+}
+
+.stage-label {
+  position: absolute;
+  bottom: 12px;
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: #0d253f;
+  font-weight: bold;
+  opacity: 0.7;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes rotateArm {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(90deg); }
+  50% { transform: rotate(180deg); }
+  75% { transform: rotate(270deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes spinTrack {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes pulseBox {
+  0% { transform: scale(0.85); background-color: #ff9800; }
+  100% { transform: scale(1.15); background-color: #4caf50; }
+}
