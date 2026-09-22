@@ -269,55 +269,14 @@
     <section id="projects" class="section scrollspy">
       <h3 class="page-title white-text blue darken-4">Projects</h3>
       <div class="container">
-        <div class="row">
+        <!-- Ziel-Container für dynamische Projekte -->
+    <div id="projects-container" class="row"></div>
 
-          <!-- Project 1: Autonomous Model Car -->
-          <div class="col s12 m6 l6">
-            <div class="card medium">
-              <div class="card-content">
-                <span class="card-title activator blue-text hoverline">Autonomous Model Car System<i
-                    class="mdi-navigation-more-vert right"></i></span>
-                <p>
-                  A complete hardware and software project developing an autonomous model car.
-                </p>
-              </div>
-              <div class="card-reveal">
-                <span class="card-title grey-text"><small>Accomplishments</small><i
-                    class="mdi-navigation-close right"></i></span>
-                <ul>
-                  <li><b>Tools:</b> C++, Python, Embedded Systems, Wi-Fi Networking</li>
-                  <li>Designed drive control algorithms and embedded execution pipelines.</li>
-                  <li>Implemented wireless Wi-Fi communication links for real-time remote control and monitoring.</li>
-                  <li>Integrated smart autonomous navigation features directly on hardware modules.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 2: Cadence Virtuoso IC Design -->
-          <div class="col s12 m6 l6">
-            <div class="card medium">
-              <div class="card-content">
-                <span class="card-title activator blue-text hoverline">CMOS Ripple Carry Adder (IC Design)<i
-                    class="mdi-navigation-more-vert right"></i></span>
-                <p>
-                  Physical transistor-level layout design and simulation using Cadence Virtuoso.
-                </p>
-              </div>
-              <div class="card-reveal">
-                <span class="card-title blue-text"><small>Accomplishments</small><i
-                    class="mdi-navigation-close right"></i></span>
-                <ul>
-                  <li><b>Tools:</b> Cadence Virtuoso, Analog Design Environment, CMOS Fabrication Layout</li>
-                  <li>Designed and simulated a ripple carry adder down to physical silicon layout constraints.</li>
-                  <li>Configured p-well structures, metal routing layers, and transistor geometries.</li>
-                  <li>Executed DRC (Design Rule Checking) and LVS (Layout Versus Schematic) verification.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-        </div>
+    <!-- Button zum Nachladen -->
+    <div class="center-align" style="margin-top: 20px; margin-bottom: 20px;">
+      <button id="load-more-btn" class="btn waves-effect waves-light blue darken-4 white-text">
+        Load More
+      </button>
       </div>
     </section>
 
@@ -515,6 +474,71 @@
         edge: "left",
         closeOnClick: true
       });
+    });
+  </script>
+
+  <!-- Activity 5: Dynamic Projects Loading -->
+  <script>
+    // 1. Mindestens 4 Projekte in einem JavaScript-Array
+    const projectsData = [
+      {
+        title: "Autonomous Model Car System",
+        description: "A complete hardware and software project developing an autonomous model car with wireless communication.",
+        tools: ["C++", "Python", "Embedded Systems", "Wi-Fi"]
+      },
+      {
+        title: "CMOS Ripple Carry Adder (IC Design)",
+        description: "Physical transistor-level layout design and DRC/LVS verification using Cadence Virtuoso.",
+        tools: ["Cadence Virtuoso", "Analog Design", "CMOS Layout"]
+      },
+      {
+        title: "Buck-Boost Power Converter Simulation",
+        description: "Modeled and simulated power electronics switching circuits with microcontrollers and MOSFET transistors.",
+        tools: ["Power Electronics", "Arduino", "Circuit Simulation"]
+      },
+      {
+        title: "Wireshark Packet Analysis Pipeline",
+        description: "Inspected network interface traffic and active WireGuard VPN tunnels on Fedora Linux.",
+        tools: ["Wireshark", "Networking", "Fedora Linux", "VPN"]
+      }
+    ];
+
+    let visibleProjectsCount = 0;
+    const projectsPerStep = 2; // Zeige jeweils 2 Projekte pro Klick
+
+    function displayNextProjects() {
+      const container = document.getElementById("projects-container");
+      const nextBatch = projectsData.slice(visibleProjectsCount, visibleProjectsCount + projectsPerStep);
+
+      nextBatch.forEach(project => {
+        const chipsHtml = project.tools.map(tool => `<span class="chip blue darken-4 white-text">${tool}</span>`).join(" ");
+
+        const projectCardHtml = `
+          <div class="col s12 m6">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title bold blue-text">${project.title}</span>
+                <p>${project.description}</p>
+                <div style="margin-top: 15px;">${chipsHtml}</div>
+              </div>
+            </div>
+          </div>
+        `;
+        container.innerHTML += projectCardHtml;
+      });
+
+      visibleProjectsCount += projectsPerStep;
+
+      // Wenn alle 4 Projekte geladen sind, den Button ausblenden
+      if (visibleProjectsCount >= projectsData.length) {
+        document.getElementById("load-more-btn").style.display = "none";
+      }
+    }
+
+    // Beim Aufruf der Seite initial die ersten 2 Projekte rendern
+    document.addEventListener("DOMContentLoaded", function () {
+      displayNextProjects();
+      document.getElementById("load-more-btn").addEventListener("click", displayNextProjects);
     });
   </script>
 </body>
